@@ -2,7 +2,7 @@
 
 const xhttp = new XMLHttpRequest();
 // local endpointroot
-// const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1/";
+// const endPointRoot = "http://localhost:8888/API/v1/";
 // heroku endpointroot
 const endPointRoot = "https://cryptic-meadow-01838.herokuapp.com/API/v1/";
   

@@ -2,7 +2,6 @@ const express = require("express");
 const mysql = require("mysql");
 const PORT = process.env.PORT || 8888;
 const app = express();
-// const endPointRoot = "http://localhost:8888/API/v1/"
 const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1/";
 
 // local database connection
