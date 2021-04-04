@@ -5,13 +5,20 @@ const app = express();
 // const endPointRoot = "http://localhost:8888/API/v1/"
 const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1/";
 
+// local database connection
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "webdev"
+// });
 
-
+// heroku database connection
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "webdev"
+  host: "us-cdbr-east-03.cleardb.com",
+  user: "b74a0f9bae8bae",
+  password: "08cba78d",
+  database: "heroku_ad48b56664ad279"
 });
 
 app.use(function(req, res, next) {
@@ -51,7 +58,7 @@ app.delete("*", (req, res) => {
 });
 
 // getOne
-app.get("/API/v1/herbs/1", (req, res) => {
+app.get("/API/v1/patients/1", (req, res) => {
   connection.query("SELECT * FROM patient where patientid = 1", (err, result) => {
     if (err) throw err;
     res.send(result);
