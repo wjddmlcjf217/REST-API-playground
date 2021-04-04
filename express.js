@@ -2,8 +2,9 @@ const express = require("express");
 const mysql = require("mysql");
 const PORT = process.env.PORT || 8888;
 const app = express();
-// const endPointRoot = "/API/v1/"
-const endPointRoot = "http://localhost:8888/API/v1/"
+// const endPointRoot = "http://localhost:8888/API/v1/"
+const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1/";
+
 
 
 const connection = mysql.createConnection({
@@ -31,7 +32,7 @@ app.post("/API/v1/herb/", (req, res) => {
 });
 
 app.put("/API/v1/patients/1", (req, res) => {
-  console.log(endPointRoot + "patients/1")
+  console.log(endPointRoot + "herbs/1")
   connection.query('UPDATE patient SET name = "Sarah Melody" where patientid = 1',
   (err, result) => {
     if (err) {
@@ -50,7 +51,7 @@ app.delete("*", (req, res) => {
 });
 
 // getOne
-app.get("/API/v1/patients/1", (req, res) => {
+app.get("/API/v1/herbs/1", (req, res) => {
   connection.query("SELECT * FROM patient where patientid = 1", (err, result) => {
     if (err) throw err;
     res.send(result);
