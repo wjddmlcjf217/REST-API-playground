@@ -31,7 +31,7 @@ app.post("/API/v1/herb/", (req, res) => {
   connection.query('INSERT INTO herb value(69, "Northern Lights", 1)',
   (err, result) => {
     if (err) {
-      throw err;
+      console.log(err);
     };
     console.log(result);
   });
@@ -51,7 +51,7 @@ app.put("/API/v1/patients/1", (req, res) => {
 // delete all entries
 app.delete("*", (req, res) => {
   connection.query("DELETE FROM herb", (err, result) => {
-    if (err) throw err;
+    if (err) console.log(err);
     res.send(result)
   });
 });
