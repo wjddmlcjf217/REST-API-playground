@@ -14,7 +14,7 @@ const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1
 // });
 
 // heroku database connection
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
   host: "us-cdbr-east-03.cleardb.com",
   user: "b74a0f9bae8bae",
   password: "08cba78d",
