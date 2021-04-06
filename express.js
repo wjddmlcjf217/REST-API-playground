@@ -86,6 +86,7 @@ app.get("/API/v1/patients/1", (req, res) => {
 // getAll
 app.get("/API/v1/herbs/", (req, res) => {
   connection.query("SELECT * FROM herb", (err, result) => {
+    // console.log(result, result.length)
     if (err) throw err;
     res.send(result);
   });
