@@ -74,27 +74,35 @@ let resource = "";
     let table = document.createElement('table');
     let th1 = document.createElement('th')
     let th2 = document.createElement('th')
-    let text1 = document.createTextNode('Herb Name')
+    let text1 = document.createTextNode('Herb')
     let text2 = document.createTextNode('In Stock')
     th1.appendChild(text1)
     th2.appendChild(text2)
     table.appendChild(th1)
     table.appendChild(th2)
-    
+
     for (let i = 0; i < obj.length; i++) {
       let tr = document.createElement('tr');
       let td1 = document.createElement('td');
       let td2 = document.createElement('td');
+
       // herbName
       let text1 = document.createTextNode(obj[i]['herbName'])
-      // status
       let text2 = document.createTextNode('Available')
+      let editBtn = document.createElement('button')
+      editBtn.innerHTML = 'Edit'
+      let deleteBtn = document.createElement('button')
+      deleteBtn.innerHTML = 'Delete'
+      
 
       td1.appendChild(text1)
       td2.appendChild(text2)
       tr.appendChild(td1)
       tr.appendChild(td2)
+      tr.appendChild(editBtn)
+      tr.appendChild(deleteBtn)
       table.appendChild(tr)
     }
+    document.getElementById('herbDisplay').innerHTML = ''
     document.getElementById('herbDisplay').appendChild(table)
   }
