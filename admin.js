@@ -18,6 +18,7 @@ let resource = "";
     }
   }
 
+  // method to add items onSubmit
   function post() {
     params = `?herbName=${document.getElementById("herbName").value.trim()}`
     console.log(params)
@@ -31,19 +32,7 @@ let resource = "";
     }
   }
 
-
-  function getOne() {
-    let id = "1";
-    resource = "patients/";
-    xhttp.open("GET", endPointRoot + resource + id, true);
-    xhttp.send();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("demo").innerHTML = this.responseText;
-      }
-    }
-  }
-
+  // inventory display method
   function getAll() {
     resource = "herbs/";
     xhttp.open("GET", endPointRoot + resource, true);
@@ -58,18 +47,37 @@ let resource = "";
     }
   }
 
-  function del() {
-    xhttp.open("DELETE", endPointRoot + "herbs/", true);
+    // deletes single entry
+    function del() {
+      console.log(retrieveID())
+      params = `?herbName=${retrieveID()}`
+      console.log(params)
+      xhttp.open("DELETE", endPointRoot + "herbs/1", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send(params);
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(xhttp)
+          document.getElementById("demo").innerHTML = "Entry Deleted";
+        }
+      }
+    }
+
+  // deletes entire inventory
+  function delAll() {
+    xhttp.open("DELETE", endPointRoot + "herbs", true);
     xhttp.setRequestHeader("Content-type", "applciation/x-www-form-urlencoded");
     xhttp.send();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
+        
         document.getElementById("demo").innerHTML = "All Entries Deleted"
-
       }
     }
   }
 
+
+  // table generation for inventory display
   function displayHerbs(obj) {
     let table = document.createElement('table');
     let th1 = document.createElement('th')
@@ -86,14 +94,16 @@ let resource = "";
       let td1 = document.createElement('td');
       let td2 = document.createElement('td');
 
-      // herbName
       let text1 = document.createTextNode(obj[i]['herbName'])
       let text2 = document.createTextNode('Available')
       let editBtn = document.createElement('button')
       editBtn.innerHTML = 'Edit'
       let deleteBtn = document.createElement('button')
       deleteBtn.innerHTML = 'Delete'
-      
+      deleteBtn.setAttribute("id", obj[i]['herbName']);
+      deleteBtn.setAttribute('onClick', 'retrieveID()');
+
+      deleteBtn.setAttribute('onClick', 'del()');
 
       td1.appendChild(text1)
       td2.appendChild(text2)
@@ -105,4 +115,8 @@ let resource = "";
     }
     document.getElementById('herbDisplay').innerHTML = ''
     document.getElementById('herbDisplay').appendChild(table)
+  }
+
+  function retrieveID () {
+    return event.target.id
   }

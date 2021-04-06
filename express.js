@@ -22,7 +22,7 @@ const connection = mysql.createConnection({
 // });
  
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
 app.use(function(req, res, next) {
@@ -32,16 +32,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-// post single herb
-// app.post("/API/v1/herbs/1", (req, res) => {
-//   connection.query('INSERT INTO herb (herbName, status) value("Northern Lights", 1)',
-//   (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     };
-//     res.send(result);
-//   });
-// });
 
 // post single herb, urlencodedParser passes data from form submission to req object
 app.post("/API/v1/herbs/1", urlencodedParser, (req, res) => {
@@ -75,13 +65,15 @@ app.delete("/API/v1/herbs", (req, res) => {
   });
 });
 
-// getOne
-app.get("/API/v1/patients/1", (req, res) => {
-  connection.query("SELECT * FROM patient where patientid = 1", (err, result) => {
-    if (err) throw err;
-    res.send(result);
+// delete single entry
+app.delete("/API/v1/herbs/1", urlencodedParser, (req, res) => {
+  console.log(req.body, req.body['?herbName'])
+  connection.query(`DELETE FROM herb where herbName = '${req.body['?herbName']}'`, (err, result) => {
+    if (err) console.log(err);
+    res.send(result)
   });
 });
+
 
 // getAll
 app.get("/API/v1/herbs/", (req, res) => {
