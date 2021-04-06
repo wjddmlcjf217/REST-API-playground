@@ -1,17 +1,13 @@
-
-
 const xhttp = new XMLHttpRequest();
 // local endpointroot
-// const endPointRoot = "http://localhost:8888/API/v1/";
+const endPointRoot = "http://localhost:8888/API/v1/";
 // heroku endpointroot
-const endPointRoot = "https://cryptic-meadow-01838.herokuapp.com/API/v1/";
+// const endPointRoot = "https://cryptic-meadow-01838.herokuapp.com/API/v1/";
   
 let params = "?name=John&age=23";
 let resource = "";
 
   function put() {
-    resource = "patients/1"
-
     xhttp.open("PUT", endPointRoot + "herbs/1", true);
     xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhttp.send();
@@ -23,12 +19,12 @@ let resource = "";
   }
 
   function post() {
-    xhttp.open("POST", endPointRoot + "herb/", true);
+    xhttp.open("POST", endPointRoot + "herbs/1", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     xhttp.send(params),
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("demo").innerHTML = this.responseText;
+        document.getElementById("demo").innerHTML = "Entry Success";
       }
     }
   }
@@ -48,7 +44,6 @@ let resource = "";
 
   function getAll() {
     resource = "herbs/";
-    console.log(endPointRoot)
     xhttp.open("GET", endPointRoot + resource, true);
     xhttp.send();
     xhttp.onreadystatechange = function () {
@@ -59,13 +54,12 @@ let resource = "";
   }
 
   function del() {
-    resource = "patients/1"
-    xhttp.open("DELETE", endPointRoot + "herb/", true);
+    xhttp.open("DELETE", endPointRoot + "herbs/", true);
     xhttp.setRequestHeader("Content-type", "applciation/x-www-form-urlencoded");
     xhttp.send();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("demo").innerHTML = this.responseText
+        document.getElementById("demo").innerHTML = "All Entries Deleted"
 
       }
     }
