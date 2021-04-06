@@ -1,5 +1,6 @@
 const express = require("express");
 const mysql = require("mysql");
+const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 8888;
 const app = express();
 const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1/";
@@ -20,6 +21,10 @@ const connection = mysql.createConnection({
 //   database: "heroku_ad48b56664ad279"
 // });
  
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
@@ -27,8 +32,22 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.post("/API/v1/herbs/1", (req, res) => {
-  connection.query('INSERT INTO herb value(1, "Northern Lights", 1)',
+// post single herb
+// app.post("/API/v1/herbs/1", (req, res) => {
+//   connection.query('INSERT INTO herb (herbName, status) value("Northern Lights", 1)',
+//   (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     };
+//     res.send(result);
+//   });
+// });
+
+// post single herb, urlencodedParser passes data from form submission to req object
+app.post("/API/v1/herbs/1", urlencodedParser, (req, res) => {
+  console.log(typeof req.body['?herbName'])
+  // $req.body['?herbName']
+  connection.query(`INSERT INTO herb (herbName, status) value('${req.body['?herbName']}', 1)`,
   (err, result) => {
     if (err) {
       console.log(err);

@@ -4,7 +4,7 @@ const endPointRoot = "http://localhost:8888/API/v1/";
 // heroku endpointroot
 // const endPointRoot = "https://cryptic-meadow-01838.herokuapp.com/API/v1/";
   
-let params = "?name=John&age=23";
+let params = "";
 let resource = "";
 
   function put() {
@@ -19,6 +19,8 @@ let resource = "";
   }
 
   function post() {
+    params = `?herbName=${document.getElementById("herbName").value.trim()}`
+    console.log(params)
     xhttp.open("POST", endPointRoot + "herbs/1", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     xhttp.send(params),

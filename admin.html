@@ -8,7 +8,15 @@
 </head>
 <body>
   <h1>Admin View of Dispensary</h1>
-  <!-- <button type="button" onclick="put()">put:update</button> -->
+
+  <form id="herbEntry", onsubmit="post()">
+    <label for="Herb Name">Herb name:</label><br>
+    <input type="text" id="herbName"><br>
+    <input type="submit" value="Submit">
+    <br><br>
+  </form> 
+
+  <button type="button" onclick="put()">Update Herb Status to Unavailable</button>
   <button type="button" onclick="getAll()">Get Herb Inventory</button>
   <!-- <button type="button" onclick="getOne()">getOne</button> -->
   <button type="button" onclick="post()">Post New Herb</button>
