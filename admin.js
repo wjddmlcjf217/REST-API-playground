@@ -7,10 +7,14 @@ const endPointRoot = "http://localhost:8888/API/v1/";
 let params = "";
 let resource = "";
 
+  // updates item status
   function put() {
-    xhttp.open("PUT", endPointRoot + "herbs/1", true);
-    xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhttp.send();
+    params = `?herbID=${retrieveID()}`
+    console.log(params)
+    xhttp.open("PUT", endPointRoot + "herbs", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    // xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhttp.send(params);
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         document.getElementById("demo").innerHTML = this.responseText
@@ -40,8 +44,12 @@ let resource = "";
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         let obj = JSON.parse(this.response)
-        console.log(obj[0]['status'], obj.length);
-        displayHerbs(obj);
+        // console.log(obj[0]['status'], obj.length);
+        if (obj.length == 0) {
+          document.getElementById('herbDisplay').innerHTML = "Inventory Empty"
+        } else {
+          displayHerbs(obj);
+        }
         document.getElementById("demo").innerHTML = this.responseText;
       }
     }
@@ -66,7 +74,7 @@ let resource = "";
   // deletes entire inventory
   function delAll() {
     xhttp.open("DELETE", endPointRoot + "herbs", true);
-    xhttp.setRequestHeader("Content-type", "applciation/x-www-form-urlencoded");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -79,6 +87,7 @@ let resource = "";
 
   // table generation for inventory display
   function displayHerbs(obj) {
+    console.log(obj)
     let table = document.createElement('table');
     let th1 = document.createElement('th')
     let th2 = document.createElement('th')
@@ -95,14 +104,19 @@ let resource = "";
       let td2 = document.createElement('td');
 
       let text1 = document.createTextNode(obj[i]['herbName'])
-      let text2 = document.createTextNode('Available')
+      let text2 = document.createTextNode(obj[i]['status'])
+
+
       let editBtn = document.createElement('button')
       editBtn.innerHTML = 'Edit'
+      editBtn.setAttribute("id", obj[i]['herbID']);
+      editBtn.setAttribute('onClick', 'retrieveID()');
+      editBtn.setAttribute('onClick', 'put()');
+
       let deleteBtn = document.createElement('button')
       deleteBtn.innerHTML = 'Delete'
       deleteBtn.setAttribute("id", obj[i]['herbName']);
       deleteBtn.setAttribute('onClick', 'retrieveID()');
-
       deleteBtn.setAttribute('onClick', 'del()');
 
       td1.appendChild(text1)

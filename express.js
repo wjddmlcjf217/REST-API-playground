@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 app.post("/API/v1/herbs/1", urlencodedParser, (req, res) => {
   console.log(typeof req.body['?herbName'])
   // $req.body['?herbName']
-  connection.query(`INSERT INTO herb (herbName, status) value('${req.body['?herbName']}', 1)`,
+  connection.query(`INSERT INTO herb (herbName, status) value('${req.body['?herbName']}', 'Available')`,
   (err, result) => {
     if (err) {
       console.log(err);
@@ -46,15 +46,16 @@ app.post("/API/v1/herbs/1", urlencodedParser, (req, res) => {
   });
 });
 
-// update individual herb entry for herbID == 1 to make it unavailable
-app.put("/API/v1/herbs/1", (req, res) => {
-  connection.query('UPDATE herb SET status = 0 where herbID = 1',
-  (err, result) => {
-    if (err) {
-      console.log(err);
-    };
-    res.send(result);
-  });
+// update individual herb status
+app.put("/API/v1/herbs/", urlencodedParser, (req, res) => {
+  console.log(req.body)
+  connection.query(`UPDATE herb SET status = IF(status = 'Unavailable', 'Available', status), status = if(status = 'Available', 'Unavailable', status) WHERE herbID = '${req.body['?herbID']}'`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      };
+      res.send(result);
+    });
 });
 
 // delete all entries
