@@ -24,7 +24,8 @@ let resource = "";
 
   // method to add items onSubmit
   function post() {
-    params = `?herbName=${document.getElementById("herbName").value.trim()}&?herbPrice=${document.getElementById("herbPrice").value}`
+    params = `?herbName=${document.getElementById("herbName").value.trim()}&?herbPrice=${document.getElementById("herbPrice").value}
+    &?herbQuantity=${document.getElementById("herbQuantity").value}`
     console.log(params)
     xhttp.open("POST", endPointRoot + "herbs/1", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
@@ -95,7 +96,7 @@ let resource = "";
 
     let text1 = document.createTextNode('Herb')
     let text2 = document.createTextNode('Price')
-    let text3 = document.createTextNode('In Stock')
+    let text3 = document.createTextNode('Quantity')
 
     th1.appendChild(text1)
     th2.appendChild(text2)
@@ -113,7 +114,7 @@ let resource = "";
 
       let text1 = document.createTextNode(obj[i]['herbName'])
       let text2 = document.createTextNode(obj[i]['herbPrice'])
-      let text3 = document.createTextNode(obj[i]['status'])
+      let text3 = document.createTextNode(obj[i]['herbQuantity'])
 
       let editBtn = document.createElement('button')
       editBtn.innerHTML = 'Edit'

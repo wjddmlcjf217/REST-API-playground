@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 app.post("/API/v1/herbs/1", urlencodedParser, (req, res) => {
   console.log(req.body)
   // $req.body['?herbName']
-  connection.query(`INSERT INTO herb (herbName, status, herbPrice) value('${req.body['?herbName']}', 'Available', '${req.body['?herbPrice']}')`,
+  connection.query(`INSERT INTO herb (herbName, herbPrice, herbQuantity) value('${req.body['?herbName']}', '${req.body['?herbPrice']}', '${req.body['?herbQuantity']}')`,
   (err, result) => {
     if (err) {
       console.log(err);
