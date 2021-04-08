@@ -35,9 +35,9 @@ app.use(function(req, res, next) {
 
 // post single herb, urlencodedParser passes data from form submission to req object
 app.post("/API/v1/herbs/1", urlencodedParser, (req, res) => {
-  console.log(typeof req.body['?herbName'])
+  console.log(req.body)
   // $req.body['?herbName']
-  connection.query(`INSERT INTO herb (herbName, status) value('${req.body['?herbName']}', 'Available')`,
+  connection.query(`INSERT INTO herb (herbName, status, herbPrice) value('${req.body['?herbName']}', 'Available', '${req.body['?herbPrice']}')`,
   (err, result) => {
     if (err) {
       console.log(err);
