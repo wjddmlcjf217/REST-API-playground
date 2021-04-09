@@ -46,6 +46,19 @@ app.post("/API/v1/herbs/1", urlencodedParser, (req, res) => {
   });
 });
 
+// post single user
+app.post("/API/v1/user/1", urlencodedParser, (req, res) => {
+  console.log(req.body)
+  // $req.body['?herbName']
+  connection.query(`INSERT INTO user (userName, userPassword) value('${req.body['?username']}', '${req.body['?password']}')`,
+  (err, result) => {
+    if (err) {
+      console.log(err);
+    };
+    res.send(result);
+  });
+});
+
 // update individual herb status
 app.put("/API/v1/herbs/", urlencodedParser, (req, res) => {
   console.log(req.body)

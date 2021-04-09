@@ -21,7 +21,7 @@ let resource = "";
         } else {
           displayHerbs(obj);
         }
-        document.getElementById("demo").innerHTML = this.responseText;
+        // document.getElementById("demo").innerHTML = this.responseText;
       }
     }
   }  
@@ -37,7 +37,7 @@ let resource = "";
 
     let text1 = document.createTextNode('Herb')
     let text2 = document.createTextNode('Price')
-    let text3 = document.createTextNode('In Stock')
+    let text3 = document.createTextNode('Quantity')
 
     th1.appendChild(text1)
     th2.appendChild(text2)
@@ -55,7 +55,7 @@ let resource = "";
 
       let text1 = document.createTextNode(obj[i]['herbName'])
       let text2 = document.createTextNode(obj[i]['herbPrice'])
-      let text3 = document.createTextNode(obj[i]['status'])
+      let text3 = document.createTextNode(obj[i]['herbQuantity'])
 
       td1.appendChild(text1)
       td2.appendChild(text2)
