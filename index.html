@@ -10,14 +10,15 @@
     </style>
 </head>
 <body>
-    <form action="admin.html">
+    <h1>Log In </h1>
+    <form onsubmit="verifyUser();return false">
         <label>username</label>
-        <input type="text">
+        <input id="username", type="text">
         <br>
         <label>password</label>
-        <input type="text">
+        <input id="password", type="text">
         <br>
         <button type="submit">login</button>
     </form>
-</body>
+    <script src="index.js"></script>
 </html>
