@@ -59,6 +59,18 @@ app.post("/API/v1/user/1", urlencodedParser, (req, res) => {
   });
 });
 
+// post single orderdetail
+app.post("/API/v1/orders/1", urlencodedParser, (req, res) => {
+  console.log(req.body)
+  connection.query(`INSERT INTO orders (userID, herbName, herbQuantity) value(1, '${req.body['?herbName']}', '${req.body['?herbQuantity']}')`,
+  (err, result) => {
+    if (err) {
+      console.log(err);
+    };
+    res.send(result);
+  });
+});
+
 // update individual herb status
 app.put("/API/v1/herbs/", urlencodedParser, (req, res) => {
   console.log(req.body)
