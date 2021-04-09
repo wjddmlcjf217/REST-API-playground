@@ -59,7 +59,7 @@ app.post("/API/v1/user/1", urlencodedParser, (req, res) => {
   });
 });
 
-// post single orderdetail
+// post single order
 app.post("/API/v1/orders/1", urlencodedParser, (req, res) => {
   console.log(req.body)
   connection.query(`INSERT INTO orders (userID, herbName, herbQuantity) value(1, '${req.body['?herbName']}', '${req.body['?herbQuantity']}')`,
@@ -91,7 +91,7 @@ app.delete("/API/v1/herbs", (req, res) => {
   });
 });
 
-// delete single entry
+// delete single herb entry
 app.delete("/API/v1/herbs/1", urlencodedParser, (req, res) => {
   console.log(req.body, req.body['?herbName'])
   connection.query(`DELETE FROM herb where herbName = '${req.body['?herbName']}'`, (err, result) => {
@@ -100,10 +100,28 @@ app.delete("/API/v1/herbs/1", urlencodedParser, (req, res) => {
   });
 });
 
+// delete single order entry
+app.delete("/API/v1/orders/1", urlencodedParser, (req, res) => {
+  console.log(req.body, req.body['?herbName'])
+  connection.query(`DELETE FROM orders where herbName = '${req.body['?herbName']}'`, (err, result) => {
+    if (err) console.log(err);
+    res.send(result)
+  });
+});
 
-// getAll
+
+// gets all herbs
 app.get("/API/v1/herbs/", (req, res) => {
   connection.query("SELECT * FROM herb", (err, result) => {
+    // console.log(result, result.length)
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// gets all ordres
+app.get("/API/v1/orders/", (req, res) => {
+  connection.query("SELECT * FROM orders", (err, result) => {
     // console.log(result, result.length)
     if (err) throw err;
     res.send(result);
