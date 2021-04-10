@@ -123,6 +123,15 @@ app.delete("/API/v1/orders/1", urlencodedParser, (req, res) => {
   });
 });
 
+// delete single user entry
+app.delete("/API/v1/users/1", urlencodedParser, (req, res) => {
+  console.log(req.body, req.body['?herbName'])
+  connection.query(`DELETE FROM user where userName = '${req.body['?userName']}'`, (err, result) => {
+    if (err) console.log(err);
+    res.send(result)
+  });
+});
+
 
 // gets all herbs
 app.get("/API/v1/herbs/", (req, res) => {

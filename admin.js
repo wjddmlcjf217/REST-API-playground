@@ -90,7 +90,7 @@ function getAllUsers() {
   }
 }
 
-// deletes single entry
+// deletes single item entry
 function del() {
   console.log(retrieveID())
   params = `?herbName=${retrieveID()}`
@@ -102,6 +102,21 @@ function del() {
     if (this.readyState == 4 && this.status == 200) {
       console.log(xhttp)
       document.getElementById("demo").innerHTML = "Entry Deleted";
+    }
+  }
+}
+
+// deletes single user 
+function deleteUser() {
+  console.log(retrieveID())
+  params = `?userName=${retrieveID()}`
+  console.log(params)
+  xhttp.open("DELETE", endPointRoot + "users/1", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(params);
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log('success')
     }
   }
 }
