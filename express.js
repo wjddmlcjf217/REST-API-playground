@@ -6,20 +6,20 @@ const app = express();
 const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1/";
 
 // local database connection
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "webdev"
-});
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "webdev"
+// });
 
 // heroku database connection
-// const connection = mysql.createPool({
-//   host: "us-cdbr-east-03.cleardb.com",
-//   user: "b74a0f9bae8bae",
-//   password: "08cba78d",
-//   database: "heroku_ad48b56664ad279"
-// });
+const connection = mysql.createPool({
+  host: "us-cdbr-east-03.cleardb.com",
+  user: "b74a0f9bae8bae",
+  password: "08cba78d",
+  database: "heroku_ad48b56664ad279"
+});
  
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
