@@ -23,6 +23,22 @@ function updateItem() {
   }
 }
 
+// updates user
+function updateUser() {
+  params = `?previousName=${getHashCode()}&?userName=${document.getElementById("userName").value.trim()}&?userPassword=${document.getElementById("userPassword").value}`
+  console.log(params)
+  xhttp.open("PUT", endPointRoot + "users/edit", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+  // xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  xhttp.send(params);
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log("success")
+      window.alert("User Updated")
+    }
+  }
+}
+
 // method to add items onSubmit
 function post() {
   params = `?herbName=${document.getElementById("herbName").value.trim()}&?herbPrice=${document.getElementById("herbPrice").value}
@@ -196,13 +212,13 @@ function displayUsers(obj) {
     editBtn.innerHTML = 'Edit'
     editBtn.setAttribute("id", obj[i]['userName']);
     editBtn.setAttribute('onClick', 'retrieveID()');
-    editBtn.setAttribute('onClick', 'moveToEdit()');
+    editBtn.setAttribute('onClick', 'moveToEditUser()');
 
     let deleteBtn = document.createElement('button')
     deleteBtn.innerHTML = 'Delete'
     deleteBtn.setAttribute("id", obj[i]['userName']);
     deleteBtn.setAttribute('onClick', 'retrieveID()');
-    deleteBtn.setAttribute('onClick', 'del()');
+    deleteBtn.setAttribute('onClick', 'deleteUser()');
 
     td1.appendChild(text1)
     td2.appendChild(text2)
@@ -212,8 +228,11 @@ function displayUsers(obj) {
     tr.appendChild(td2)
     tr.appendChild(td3)
 
-    tr.appendChild(editBtn)
-    tr.appendChild(deleteBtn)
+    if (i != 0) {
+      tr.appendChild(editBtn)
+      tr.appendChild(deleteBtn)
+    }
+
     table.appendChild(tr)
   }
   document.getElementById('userDisplay').innerHTML = ''
@@ -225,6 +244,11 @@ function moveToEdit() {
   window.location.href = `adminEditStore.html#${retrieveID()}`
 }
 
+// changes to edit screen upon clicking edit button while hashing id of item
+function moveToEditUser() {
+  window.location.href = `adminEditUser.html#${retrieveID()}`
+}
+
 // returns sanitized hashcode which references id of item to be editted
 function getHashCode() {
   let hashcode = window.location.hash
@@ -234,7 +258,6 @@ function getHashCode() {
   console.log(hashcode)
   return hashcode
 }
-
 
 function retrieveID () {
   console.log(event.target.id)

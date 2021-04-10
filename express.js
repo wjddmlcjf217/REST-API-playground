@@ -84,6 +84,19 @@ app.put("/API/v1/herbs/edit", urlencodedParser, (req, res) => {
     });
 });
 
+// update individual user credentials
+app.put("/API/v1/users/edit", urlencodedParser, (req, res) => {
+  console.log(req.body)
+  connection.query(`UPDATE user SET userName = '${req.body['?userName']}', userPassword = '${req.body['?userPassword']}'
+  WHERE userName = '${req.body['?previousName']}'`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      };
+      res.send(result);
+    });
+});
+
 // delete all entries
 app.delete("/API/v1/herbs", (req, res) => {
   connection.query("DELETE FROM herb", (err, result) => {
