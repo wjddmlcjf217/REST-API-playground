@@ -129,6 +129,15 @@ app.get("/API/v1/orders/", (req, res) => {
   });
 });
 
+// gets all users
+app.get("/API/v1/users/", (req, res) => {
+  connection.query("SELECT * FROM user", (err, result) => {
+    // console.log(result, result.length)
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 
 app.listen(PORT, (err) => {
   if (err) throw err;
