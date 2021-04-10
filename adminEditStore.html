@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Add Item Page</title>
+  <title>Admin Edit Store View</title>
 </head>
 <body>
-  <h1>Admin View of Dispensary</h1>
-
+  <h1>Admin Edit Store View</h1>
   <div>
     <a href="admin.html">
       <button>
@@ -19,12 +18,13 @@
   <div>
     <a href="adminViewStore.html">
       <button>
-      View Store
+      Click to view Store
     </button>
     </a>
-  </div>
-  <form id="herbEntry", onsubmit="post()">
-    <h3>Add new Herb to Store</h3>
+  </div>  
+
+  <form id="herbEntry", onsubmit="put()">
+    <h3 id="currentHerb">Edit Item</h3>
     <label for="Herb Name">Herb name:</label><br>
     <input type="text" id="herbName"><br>
     <label for="Herb Price">Herb Price:</label><br>
@@ -35,7 +35,9 @@
   </form> 
 
   <br>
-
+  <div id="herbDisplay"></div>
 <script src="admin.js"></script>
+<script>displayHashCode()</script>
 </body>
+
 </html>

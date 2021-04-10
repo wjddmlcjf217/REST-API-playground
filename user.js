@@ -17,7 +17,7 @@ function getAll() {
       let obj = JSON.parse(this.response)
       // console.log(obj[0]['status'], obj.length);
       if (obj.length == 0) {
-        document.getElementById('herbDisplay').innerHTML = "Out of Order"
+        document.getElementById('herbDisplay').innerHTML = "Store Empty"
       } else {
         displayHerbs(obj);
       }
@@ -59,7 +59,6 @@ function displayHerbs(obj) {
 
     // text2.setAttribute()
     
-    let form = document.createElement('form')
     let amountToBuyField = document.createElement('input')
     let amountToBuyFieldBtn = document.createElement('button')
 
