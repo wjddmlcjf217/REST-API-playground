@@ -72,9 +72,10 @@ app.post("/API/v1/orders/1", urlencodedParser, (req, res) => {
 });
 
 // update individual herb status
-app.put("/API/v1/herbs/", urlencodedParser, (req, res) => {
+app.put("/API/v1/herbs/edit", urlencodedParser, (req, res) => {
   console.log(req.body)
-  connection.query(`UPDATE herb SET status = IF(status = 'Unavailable', 'Available', status), status = if(status = 'Available', 'Unavailable', status) WHERE herbID = '${req.body['?herbID']}'`,
+  connection.query(`UPDATE herb SET herbName = '${req.body['?herbName']}', herbPrice = ${req.body['?herbPrice']}, herbQuantity = ${req.body['?herbQuantity']} 
+  WHERE herbName = '${req.body['?previousHerb']}'`,
     (err, result) => {
       if (err) {
         console.log(err);
@@ -119,7 +120,7 @@ app.get("/API/v1/herbs/", (req, res) => {
   });
 });
 
-// gets all ordres
+// gets all orders
 app.get("/API/v1/orders/", (req, res) => {
   connection.query("SELECT * FROM orders", (err, result) => {
     // console.log(result, result.length)
@@ -127,6 +128,7 @@ app.get("/API/v1/orders/", (req, res) => {
     res.send(result);
   });
 });
+
 
 app.listen(PORT, (err) => {
   if (err) throw err;
