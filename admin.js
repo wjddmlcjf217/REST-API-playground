@@ -28,7 +28,6 @@ function updateItem() {
     }
   }
 }
-
 // updates user
 function updateUser() {
   if (document.getElementById("userName").value.trim().length == 0 || document.getElementById("userPassword").value.trim().length == 0) {
