@@ -117,6 +117,10 @@ function deleteUser() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       console.log('success')
+      if (window.alert("User Deleted")) {
+
+      }
+      else window.location.reload(); 
     }
   }
 }
