@@ -9,6 +9,10 @@ let resource = "";
 
 // updates item
 function updateItem() {
+  if (document.getElementById("herbName").value.trim().length == 0 || document.getElementById("herbPrice").value.trim().length == 0 || document.getElementById("herbQuantity").value.trim().length == 0 ) {
+    if (window.alert("Please Enter Valid Input")) {}
+    else return; 
+  }
   params = `?previousHerb=${getHashCode()}&?herbName=${document.getElementById("herbName").value.trim()}&?herbPrice=${document.getElementById("herbPrice").value}
   &?herbQuantity=${document.getElementById("herbQuantity").value}`
   console.log(params)
@@ -19,12 +23,18 @@ function updateItem() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       console.log("success")
+      if (window.alert("Item Updated")) {}
+      else window.location.href = "adminViewStore.html"; 
     }
   }
 }
 
 // updates user
 function updateUser() {
+  if (document.getElementById("userName").value.trim().length == 0 || document.getElementById("userPassword").value.trim().length == 0) {
+    if (window.alert("Please Enter Valid Input")) {}
+    else return; 
+  }
   params = `?previousName=${getHashCode()}&?userName=${document.getElementById("userName").value.trim()}&?userPassword=${document.getElementById("userPassword").value}`
   console.log(params)
   xhttp.open("PUT", endPointRoot + "users/edit", true);
@@ -34,14 +44,19 @@ function updateUser() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       console.log("success")
-      window.alert("User Updated")
+      if (window.alert("User Updated")) {}
+      else window.location.href = "adminViewUser.html"; 
     }
   }
 }
 
-// method to add items onSubmit
+// adds a single item 
 function post() {
-  params = `?herbName=${document.getElementById("herbName").value.trim()}&?herbPrice=${document.getElementById("herbPrice").value}
+  if (document.getElementById("herbName").value.trim().length == 0 || document.getElementById("herbPrice").value.trim().length == 0 || document.getElementById("herbQuantity").value.trim().length == 0 ) {
+    if (window.alert("Please Enter Valid Input")) {}
+    else return; 
+  }
+    params = `?herbName=${document.getElementById("herbName").value.trim()}&?herbPrice=${document.getElementById("herbPrice").value}
   &?herbQuantity=${document.getElementById("herbQuantity").value}`
   console.log(params)
   xhttp.open("POST", endPointRoot + "herbs/1", true);
@@ -49,8 +64,8 @@ function post() {
   xhttp.send(params),
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML = "Entry Success";
-    }
+      if (window.alert("Item Added")) {}
+      else window.location.href = "adminViewStore.html";     }
   }
 }
 
@@ -101,8 +116,8 @@ function del() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       console.log(xhttp)
-      document.getElementById("demo").innerHTML = "Entry Deleted";
-    }
+      if (window.alert("Item Deleted")) {}
+      else window.location.href = "adminViewStore.html";     }
   }
 }
 
@@ -117,9 +132,8 @@ function deleteUser() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       console.log('success')
-      if (window.alert("User Deleted")) {
-
-      }
+      // expression to reload after user clicks confirm
+      if (window.alert("User Deleted")) {}
       else window.location.reload(); 
     }
   }
@@ -273,7 +287,7 @@ function getHashCode() {
   let hashcode = window.location.hash
   hashcode = hashcode.replace('#', '')
   hashcode = hashcode.replace('%20', ' ')
-  document.getElementById('currentHerb').innerHTML = `Editting: ${hashcode}`
+  document.getElementById('currentHerb').innerHTML = `Editing: ${hashcode}`
   console.log(hashcode)
   return hashcode
 }
