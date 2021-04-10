@@ -16,9 +16,9 @@ const endPointRoot = "http://localhost:" + process.env.PORT || "8888" + "/API/v1
 // heroku database connection
 const connection = mysql.createPool({
   host: "us-cdbr-east-03.cleardb.com",
-  user: "b74a0f9bae8bae",
-  password: "08cba78d",
-  database: "heroku_ad48b56664ad279"
+  user: "b764104b662888",
+  password: "ebabf12",
+  database: "heroku_632f32df7eb9665"
 });
  
 // create application/x-www-form-urlencoded parser
